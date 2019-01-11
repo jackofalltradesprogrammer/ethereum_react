@@ -49,7 +49,7 @@ contract Campaign {
     }
     
     function createRequest(string description, uint value, address recipient) public restricted { // only manager should be able to call this 
-        require(approvers[msg.sender]); // In mappings - we provide the key as address and a hashing code is run to return the boolean
+        //require(approvers[msg.sender]); // In mappings - we provide the key as address and a hashing code is run to return the boolean
         Request memory newRequest = Request({
             description: description,
             value: value,
