@@ -1,12 +1,13 @@
 import React from 'react';
+import Header from './Header';
 
 export default (props) => { // our functional components get called with props arguments
   return  (
     <div>
-        <h1>I'm a header</h1>
+        <Header/>
         {/* All the JSX passes between <Layout></Layout> will be passed as children  */}
         {props.children}    
-        <h1>I'm a footer</h1>
+        <h1>Im a footer</h1>
     </div>
   );
 };
