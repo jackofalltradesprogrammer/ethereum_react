@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Card, Button } from "semantic-ui-react";
 import factory from "../ethereum/factory"; //gets the instance to interact with the contract - web3 takes care of authentication
+import Layout from '../components/Layout';
 
 // class based component
 class CampaignIndex extends Component {
@@ -26,6 +27,7 @@ class CampaignIndex extends Component {
 
   render() {
     return (
+      <Layout>
       <div>
         <link
           rel="stylesheet"
@@ -39,6 +41,7 @@ class CampaignIndex extends Component {
           primary // its read as primary = {true} in react
         />
       </div>
+      </Layout>
     );
   }
 }
