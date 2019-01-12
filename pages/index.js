@@ -4,14 +4,14 @@ import factory from '../ethereum/factory'; //gets the instance to interact with 
 
 // class based component
 class CampaignIndex extends Component {
-    async componentDidMount()   {
+    static async getInitialProps(){  // static is a class function and not instance. THis function is exclusive to NEST and is run without rendering the component
         const campaigns = await factory.methods.getDeployedCampaigns().call();
-        
-        console.log(campaigns);
-    }
 
+        return  {campaigns} ; // this is provided as props to our component and is read as {campaigns : campaigns}
+    }
+    
     render() {
-        return <div>Campaign Index!</div>
+        return <div>{this.props.campaigns[0]}</div>;
     }
 }
 
