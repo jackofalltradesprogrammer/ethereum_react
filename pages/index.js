@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card } from "semantic-ui-react";
+import { Card, Button } from "semantic-ui-react";
 import factory from "../ethereum/factory"; //gets the instance to interact with the contract - web3 takes care of authentication
 
 // class based component
@@ -31,7 +31,13 @@ class CampaignIndex extends Component {
           rel="stylesheet"
           href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.css"
         />
+        <h3>Open Campaigns</h3>
         {this.renderCampaigns()}
+        <Button
+          content = "Create Campaign"
+          icon="add circle"
+          primary // its read as primary = {true} in react
+        />
       </div>
     );
   }
