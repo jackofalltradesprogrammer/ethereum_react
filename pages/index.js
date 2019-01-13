@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Card, Button } from "semantic-ui-react";
 import factory from "../ethereum/factory"; //gets the instance to interact with the contract - web3 takes care of authentication
-import Layout from '../components/Layout';
+import Layout from "../components/Layout";
+import { Link } from "../routes";
 
 // class based component
 class CampaignIndex extends Component {
@@ -17,7 +18,11 @@ class CampaignIndex extends Component {
       // we pass a function to map, that function is called once for every elementin the array
       return {
         header: address, //first thing to display on the card for Semantic UI
-        description: <a>View campaigns</a>,
+        description: (
+          <Link route={`/campaigns/${address}`}>
+            <a>View campaigns</a>
+          </Link>
+        ),
         fluid: true // it is used to stretch the card to cover the window screen available
       };
     });
@@ -28,15 +33,22 @@ class CampaignIndex extends Component {
   render() {
     return (
       <Layout>
-      <div>
-        <h3>Open Campaigns</h3>
-        <Button floated="right"
-          content = "Create Campaign"
-          icon="add circle"
-          primary // its read as primary = {true} in react
-          />
-        {this.renderCampaigns()}
-      </div>
+        <div>
+          <h3>Open Campaigns</h3>
+          {/* a generic component that doesn't add anything of its own. It wraps its children with clickEvent handler to navigate
+                <a> tags are used to get Semantic UI to display some css */}
+          <Link route="/campaigns/new">
+            <a>
+              <Button
+                floated="right"
+                content="Create Campaign"
+                icon="add circle"
+                primary // its read as primary = {true} in react
+              />
+            </a>
+          </Link>
+          {this.renderCampaigns()}
+        </div>
       </Layout>
     );
   }

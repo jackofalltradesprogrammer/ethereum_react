@@ -6,7 +6,8 @@ export default () => { // we need to export this component to be used by Layout.
     return (
         //  double curly braces are used to tell that its javascript code with object literal inside
         <Menu style={{ marginTop:  '10px'}}> 
-            {/* a generic component that doesn't add anything of its own. It wraps its children with clickEvent handler to navigate */}
+            {/* a generic component that doesn't add anything of its own. It wraps its children with clickEvent handler to navigate
+                <a> tags are used to get Semantic UI to display some css */}
             <Link route="/">
                 <a className="item">CrowdCoin</a>
             </Link>
