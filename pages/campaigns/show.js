@@ -14,6 +14,7 @@ class CampaignShow extends Component {
         const summary = await campaign.methods.getSummary().call();
         // pass the properties with names instead of the object which is difficult to understand
         return {
+            address: props.query.address,
             minimumContribution: summary[0],
             balance: summary[1],
             requestsCount: summary[2],
@@ -75,7 +76,8 @@ class CampaignShow extends Component {
                         {this.renderCards()}
                     </Grid.Column>
                     <Grid.Column width={6}>
-                        <ContributeForm />
+                        {/* the address is passed from the parent to child - this will go in props for contribute form */}
+                        <ContributeForm address={this.props.address}/>
                     </Grid.Column>
                 </Grid>
             </Layout>
