@@ -1,5 +1,5 @@
 // This components shows the details of deployed contract
-import React, { component } from 'react';
+import React, { Component } from 'react';
 
 class CampaignShow extends Component {
     render() {
