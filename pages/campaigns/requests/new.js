@@ -21,11 +21,31 @@ class RequestNew extends Component {
         return { address };
     }
 
+    // Anonymous funciton is used here because we want to preserve 'this' variable
+    onSubmit = async event => {
+        event.preventDefault();
+
+        const campaign = Campaign(this.props.address);
+        const { description, value, recipient } = this.state;
+
+        try {
+            const accounts = await web3.eth.getAccounts();
+            await campaign.methods
+                .createRequest( description, web3.utils.toWei(value, 'ether'), recipient)
+                .send({ from: accounts[0] });
+        } catch (err) {
+
+        }
+    };
+
     render() {
         return (
             <Layout>
                 <h3>Create a Request </h3>
-                <Form>
+                {/* no parentheses after onSubmit because we are passing it an anonymous function that will be executed later 
+                 error property is used her to toggle Message Component on/off
+                 !! it converts opp boolean twice*/}
+                <Form onSubmit={this.onSubmit}>
                     <Form.Field>
                         <label>Description</label>
                         <Input
