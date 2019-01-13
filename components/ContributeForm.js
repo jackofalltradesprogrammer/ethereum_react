@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Form, Input, Message, Button } from 'semantic-ui-react';
 import Campaign from '../ethereum/campaign'; // to get the contract instance from the arrow function by passing the address
 import web3 from '../ethereum/web3'; // to get the accounts to submit the transaction
+import { Router } from '../routes';
 
 class ContributeForm extends Component {
     state = {
@@ -16,12 +17,14 @@ class ContributeForm extends Component {
         const campaign = Campaign(this.props.address);
 
         try {
-            // we are contributing some money to the contracts
+            // we are contributing some money to the contract
             const accounts = await web3.eth.getAccounts();
             await campaign.methods.contribute().send({
                 from: accounts[0],
                 value: web3.utils.toWei(this.state.value, 'ether')
             });
+            // This causes the refresh of the page after the transaction completes successfully
+            Router.replaceRoute(`/campaigns/${this.props.address}`);
         } catch (err) {
 
         }
