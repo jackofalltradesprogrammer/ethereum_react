@@ -4,6 +4,7 @@ import { Card } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import Campaign from '../../ethereum/campaign'; // gets the arrow function defined in the campaign.js
 import web3 from '../../ethereum/web3';
+import ContributeForm from '../../components/ContributeForm';
 
 class CampaignShow extends Component {
     //props will have the access to url being passed 
@@ -70,6 +71,7 @@ class CampaignShow extends Component {
             <Layout>
                 <h3>Campaign Show</h3>
                 {this.renderCards()}
+                <ContributeForm />
             </Layout>
         );
     }
