@@ -1,10 +1,11 @@
 // This components shows the details of deployed contract
 import React, { Component } from 'react';
-import { Card, Grid } from 'semantic-ui-react';
+import { Card, Grid, Button } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import Campaign from '../../ethereum/campaign'; // gets the arrow function defined in the campaign.js
 import web3 from '../../ethereum/web3';
 import ContributeForm from '../../components/ContributeForm';
+import { Link } from '../../routes'; // it will wrap the content and when you click it, it will help navigate to other pages 
 
 class CampaignShow extends Component {
     //props will have the access to url being passed 
@@ -74,6 +75,11 @@ class CampaignShow extends Component {
                 <Grid>
                     <Grid.Column width={10}>
                         {this.renderCards()}
+                        <Link route={`/campaigns/${this.props.address}/requests`}>
+                            <a>
+                                <Button primary>View Requests</Button>
+                            </a>
+                        </Link>
                     </Grid.Column>
                     <Grid.Column width={6}>
                         {/* the address is passed from the parent to child - this will go in props for contribute form */}
