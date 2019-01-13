@@ -7,7 +7,9 @@ import { Router } from '../routes';
 
 class ContributeForm extends Component {
     state = {
-        value: ''
+        value: '',
+        errorMessage: '',   // to display error message of any kind
+        loading: false      // to toggle spinner on/off
     };
 
     // Anonymous funciton is used here because we want to preserve 'this' variable
@@ -15,6 +17,9 @@ class ContributeForm extends Component {
         event.preventDefault();
         
         const campaign = Campaign(this.props.address);
+
+        // starts the spinner and makes the message disappear
+        this.setState({loading: true, errorMessage: ''});
 
         try {
             // we are contributing some money to the contract
@@ -26,14 +31,18 @@ class ContributeForm extends Component {
             // This causes the refresh of the page after the transaction completes successfully
             Router.replaceRoute(`/campaigns/${this.props.address}`);
         } catch (err) {
-
+            this.setState({ errorMessage: err.message });
         }
+
+        // resets the Contribution form
+        this.setState({ loading: false, value: ''});
     };
 
     // for the form Sumbission, an arrow function is passed to preserve 'this' value
+    // error property in the form tells Semantic UI to display message if error is present
     render() {
         return (
-            <Form onSubmit={this.onSubmit}>
+            <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                 <Form.Field>
                     <label> Amount ot Contribute</label>
                     <Input
@@ -43,7 +52,8 @@ class ContributeForm extends Component {
                         labelPosition="right"
                     />
                 </Form.Field>
-                <Button primary>
+                <Message error header="Oops!" content={this.state.errorMessage} />
+                <Button primary loading={this.state.loading}>
                     Contribute!
                 </Button>
             </Form>
