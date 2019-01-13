@@ -3,11 +3,12 @@ import { Form, Button, Input, Message } from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import factory from "../../ethereum/factory"; // we need factory to access the ABI to interact with our contract
 import web3 from "../../ethereum/web3";
+import { Router } from "../../routes"; // Link (not using here) helps us generate anchror tages for navigation, Router to redirect people from one page to another
 
 class CampaignNew extends Component {
   state = {
-    minimumContribution: '',
-    errorMessage: '',
+    minimumContribution: "",
+    errorMessage: "",
     loading: false
   };
 
@@ -16,7 +17,7 @@ class CampaignNew extends Component {
     event.preventDefault();
 
     // for the loading spinner to appear in UI as react renders the form
-    this.setState({ loading: true, errorMessage: ''});
+    this.setState({ loading: true, errorMessage: "" });
 
     try {
       const accounts = await web3.eth.getAccounts();
@@ -25,11 +26,12 @@ class CampaignNew extends Component {
         .send({
           from: accounts[0]
         });
+      Router.pushRoute('/');
     } catch (err) {
-        this.setState({errorMessage: err.message});
+      this.setState({ errorMessage: err.message });
     }
 
-    this.setState({ loading: false});
+    this.setState({ loading: false });
   };
 
   render() {
@@ -52,9 +54,9 @@ class CampaignNew extends Component {
               }
             />
           </Form.Field>
-          
+
           {/* Message Component from Semantic UI to display errors. THIS WON'T WORK UNLESS YOU ADD ERROR PROPERTY TO FORM */}
-          <Message error header="Oops!" content={this.state.errorMessage} />    
+          <Message error header="Oops!" content={this.state.errorMessage} />
           <Button loading={this.state.loading} primary>
             Create!
           </Button>
