@@ -14,6 +14,15 @@ class RequestRow extends Component {
         });
     };
 
+    onFinalize = async () => {
+        const campaign = Campaign(this.props.address);
+
+        const accounts = await web3.eth.getAccounts();
+        await campaign.methods.finalizeRequest(this.props.id).send({
+            from: accounts[0]
+        });
+    };
+
     render() {
         const { Row, Cell } = Table; //ES15 syntax to store Table.Row in Row etc
         const { id, request, approversCount } = this.props;
@@ -30,6 +39,12 @@ class RequestRow extends Component {
                         Approve
                     </Button>
                 </Cell>
+                <Cell>
+                    {/* We don't use parentheses () after this.onApprove becuase we don't want to call it right away */}
+                    <Button color="teal" basic onClick={this.onFinalize}>
+                        Finalize
+                    </Button>
+                </Cell>                
             </Row>
         );
     }
