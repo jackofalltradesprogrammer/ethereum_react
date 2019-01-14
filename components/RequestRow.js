@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import web3 from '../ethereum/web3';
+import Campaign from '../ethereum/campaign';
 
 class RequestRow extends Component {
     onApprove = async () => {
+        const campaign = Campaign(this.props.address); // as the parent component is passing the address
 
+        const accounts = await web3.eth.getAccounts();
+        // A user can send the approval for a request
+        await campaign.methods.approveRequest(this.props.id).send({
+            from: accounts[0]
+        });
     };
 
     render() {
