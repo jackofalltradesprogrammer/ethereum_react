@@ -11,8 +11,9 @@ class RequestIndex extends Component {
     static async getInitialProps(props) {
         const { address} = props.query; // address variable is like a wildcard defined in the route.js
         const campaign = Campaign(address); // pass teh address to the arrow function to Campaign and get the instance
-
         const requestCount = await campaign.methods.getRequestsCount().call();
+        const approversCount = await campaign.methods.approversCount().call();
+
         // Array(count).fill.map() runs number of times starting from 0 and more and gets the elements
         const requests = await Promise.all(
           Array(parseInt(requestCount)).fill().map((element, index) => {
@@ -21,7 +22,7 @@ class RequestIndex extends Component {
         );
 
 
-        return { address, requests, requestCount }; // its read as address: address
+        return { address, requests, requestCount, approversCount }; // its read as address: address
 
     }
     
@@ -32,6 +33,7 @@ class RequestIndex extends Component {
                 id={index}
                 request={request}
                 address={this.props.address}
+                approversCount={this.props.approversCount}
             />;
         });
     }
