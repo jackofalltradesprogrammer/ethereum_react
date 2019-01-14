@@ -4,6 +4,7 @@ import { Button, Table } from 'semantic-ui-react';
 import { Link } from '../../../routes';
 import Layout from '../../../components/Layout';
 import Campaign from '../../../ethereum/campaign';
+import RequestRow from '../../../components/RequestRow'; // This child component will render each request 
 
 class RequestIndex extends Component {
     // this function provided by NEXT can be used to pull info from the address bar
@@ -23,6 +24,18 @@ class RequestIndex extends Component {
         return { address, requests, requestCount }; // its read as address: address
 
     }
+    
+    renderRows() {
+        return this.props.requests.map((request, index) => {
+            return <RequestRow
+                key={index} // react needs a key property if we are rendering list of components
+                id={index}
+                request={request}
+                address={this.props.address}
+            />;
+        });
+    }
+
     render() {
         //ES15 syntax to get everything required for Semantic UI from Table tag 
         const { Header, Row, HeaderCell, Body } = Table;
@@ -46,6 +59,9 @@ class RequestIndex extends Component {
                             <HeaderCell>Finalize</HeaderCell>
                         </Row>
                     </Header>
+                    <Body>
+                        {this.renderRows()}
+                    </Body>
                 </Table>
             </Layout>
         );
