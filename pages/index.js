@@ -20,7 +20,7 @@ class CampaignIndex extends Component {
         header: address, //first thing to display on the card for Semantic UI
         description: (
           <Link route={`/campaigns/${address}`}>
-            <a>View campaigns</a>
+            <a>View Contracts</a>
           </Link>
         ),
         fluid: true // it is used to stretch the card to cover the window screen available
@@ -34,14 +34,14 @@ class CampaignIndex extends Component {
     return (
       <Layout>
         <div>
-          <h3>Open Campaigns</h3>
+          <h3>Open Contracts</h3>
           {/* a generic component that doesn't add anything of its own. It wraps its children with clickEvent handler to navigate
                 <a> tags are used to get Semantic UI to display some css */}
           <Link route="/campaigns/new">
             <a>
               <Button
                 floated="right"
-                content="Create Campaign"
+                content="Deploy Contract"
                 icon="add circle"
                 primary // its read as primary = {true} in react
               />

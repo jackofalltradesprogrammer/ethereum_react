@@ -38,7 +38,7 @@ class CampaignShow extends Component {
             {
                 header: manager,
                 meta: 'Address of Manager',
-                description: 'The manager created this campaign and can create requests to withdraw money',
+                description: 'The manager created this contract and can create requests to withdraw money',
                 style: { overflowWrap: 'break-word' }
             },
 
@@ -56,12 +56,12 @@ class CampaignShow extends Component {
             {
                 header: approversCount,
                 meta: 'Number of Approvers',
-                description: 'Number of people who have already donated to this campaign'
+                description: 'Number of people who have already donated to this contract'
             },
             {
                 header: web3.utils.fromWei(balance,'ether'),
-                meta: 'Campaign Balance (ether)',
-                description: 'The balance is how much money this campaign has left to spend.'
+                meta: 'Contract Balance (ether)',
+                description: 'The balance is how much money this contract has left to spend.'
             }
         ];
         // Card Group from semantic UI REACT
@@ -71,7 +71,7 @@ class CampaignShow extends Component {
     render() {
         return (
             <Layout>
-                <h3>Campaign Show</h3>
+                <h3>Contract Show</h3>
                 <Grid>
                     <Grid.Row>
                         <Grid.Column width={10}>

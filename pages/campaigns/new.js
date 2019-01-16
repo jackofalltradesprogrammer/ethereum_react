@@ -37,7 +37,7 @@ class CampaignNew extends Component {
   render() {
     return (
       <Layout>
-        <h3>Create a Campaign</h3>
+        <h3>Deploy a Contract</h3>
 
         {/* no parentheses after onSubmit because we are passing it an anonymous function that will be executed later 
             error property is used her to toggle Message Component on/off
