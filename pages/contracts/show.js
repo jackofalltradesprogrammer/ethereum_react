@@ -2,17 +2,17 @@
 import React, { Component } from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
-import Campaign from '../../ethereum/campaign'; // gets the arrow function defined in the campaign.js
+import Contract from '../../ethereum/contract'; // gets the arrow function defined in the contract.js
 import web3 from '../../ethereum/web3';
 import ContributeForm from '../../components/ContributeForm';
 import { Link } from '../../routes'; // it will wrap the content and when you click it, it will help navigate to other pages 
 
-class CampaignShow extends Component {
+class ContractShow extends Component {
     //props will have the access to url being passed 
     static async getInitialProps(props) {
-        const campaign = Campaign(props.query.address);
+        const contract = Contract(props.query.address);
 
-        const summary = await campaign.methods.getSummary().call();
+        const summary = await contract.methods.getSummary().call();
         // pass the properties with names instead of the object which is difficult to understand
         return {
             address: props.query.address,
@@ -87,7 +87,7 @@ class CampaignShow extends Component {
 
                     <Grid.Row>
                         <Grid.Column>
-                            <Link route={`/campaigns/${this.props.address}/requests`}>
+                            <Link route={`/contracts/${this.props.address}/requests`}>
                                 <a>
                                     <Button primary>View Requests</Button>
                                 </a>
@@ -100,4 +100,4 @@ class CampaignShow extends Component {
     }
 }
 
-export default CampaignShow;
+export default ContractShow;

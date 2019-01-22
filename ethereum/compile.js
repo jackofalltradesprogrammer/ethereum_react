@@ -5,8 +5,8 @@ const fs = require('fs-extra'); // extra helpers for file system
 const buildPath = path.resolve(__dirname, 'build');
 fs.removeSync(buildPath); // better than 'fs' node  as it makes it easier to delete the folder and everything inside it
 
-const campaignPath = path.resolve(__dirname, 'contracts', 'Campaign.sol');
-const source = fs.readFileSync(campaignPath, 'utf8'); // read the file
+const contractPath = path.resolve(__dirname, 'contracts', 'Contract.sol');
+const source = fs.readFileSync(contractPath, 'utf8'); // read the file
 const output = solc.compile(source, 1).contracts; // as there are two files coming from our contract
 
 fs.ensureDirSync(buildPath); // Make sure the folder exist and if not then create it

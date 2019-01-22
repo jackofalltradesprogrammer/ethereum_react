@@ -1,7 +1,7 @@
 // this component will be used in multiple places so that users can contribute to the contract
 import React, { Component } from 'react';
 import { Form, Input, Message, Button } from 'semantic-ui-react';
-import Campaign from '../ethereum/campaign'; // to get the contract instance from the arrow function by passing the address
+import Contract from '../ethereum/contract'; // to get the contract instance from the arrow function by passing the address
 import web3 from '../ethereum/web3'; // to get the accounts to submit the transaction
 import { Router } from '../routes';
 
@@ -16,7 +16,7 @@ class ContributeForm extends Component {
     onSubmit = async (event) => {
         event.preventDefault();
         
-        const campaign = Campaign(this.props.address);
+        const contract = Contract(this.props.address);
 
         // starts the spinner and makes the message disappear
         this.setState({loading: true, errorMessage: ''});
@@ -24,12 +24,12 @@ class ContributeForm extends Component {
         try {
             // we are contributing some money to the contract
             const accounts = await web3.eth.getAccounts();
-            await campaign.methods.contribute().send({
+            await contract.methods.contribute().send({
                 from: accounts[0],
                 value: web3.utils.toWei(this.state.value, 'ether')
             });
             // This causes the refresh of the page after the transaction completes successfully
-            Router.replaceRoute(`/campaigns/${this.props.address}`);
+            Router.replaceRoute(`/contracts/${this.props.address}`);
         } catch (err) {
             this.setState({ errorMessage: err.message });
         }

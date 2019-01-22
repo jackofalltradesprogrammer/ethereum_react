@@ -5,21 +5,21 @@ import Layout from "../components/Layout";
 import { Link } from "../routes";
 
 // class based component
-class CampaignIndex extends Component {
+class ContractIndex extends Component {
   static async getInitialProps() {
     // static is a class function and not instance. THis function is exclusive to NEST and is run without rendering the component
-    const campaigns = await factory.methods.getDeployedCampaigns().call();
+    const contracts = await factory.methods.getDeployedContracts().call();
 
-    return { campaigns }; // this is provided as props to our component and is read as {campaigns : campaigns}
+    return { contracts }; // this is provided as props to our component and is read as {contracts : contracts}
   }
 
-  renderCampaigns() {
-    const items = this.props.campaigns.map(address => {
+  renderContracts() {
+    const items = this.props.contracts.map(address => {
       // we pass a function to map, that function is called once for every elementin the array
       return {
         header: address, //first thing to display on the card for Semantic UI
         description: (
-          <Link route={`/campaigns/${address}`}>
+          <Link route={`/contracts/${address}`}>
             <a>View Contracts</a>
           </Link>
         ),
@@ -37,7 +37,7 @@ class CampaignIndex extends Component {
           <h3>Open Contracts</h3>
           {/* a generic component that doesn't add anything of its own. It wraps its children with clickEvent handler to navigate
                 <a> tags are used to get Semantic UI to display some css */}
-          <Link route="/campaigns/new">
+          <Link route="/contracts/new">
             <a>
               <Button
                 floated="right"
@@ -47,7 +47,7 @@ class CampaignIndex extends Component {
               />
             </a>
           </Link>
-          {this.renderCampaigns()}
+          {this.renderContracts()}
         </div>
       </Layout>
     );
@@ -56,4 +56,4 @@ class CampaignIndex extends Component {
 
 // NEXT expect an export of react component
 
-export default CampaignIndex;
+export default ContractIndex;

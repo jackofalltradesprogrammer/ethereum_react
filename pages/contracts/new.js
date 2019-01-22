@@ -5,7 +5,7 @@ import factory from "../../ethereum/factory"; // we need factory to access the A
 import web3 from "../../ethereum/web3";
 import { Router } from "../../routes"; // Link (not using here) helps us generate anchror tages for navigation, Router to redirect people from one page to another
 
-class CampaignNew extends Component {
+class ContractNew extends Component {
   state = {
     minimumContribution: "",
     errorMessage: "",
@@ -22,7 +22,7 @@ class CampaignNew extends Component {
     try {
       const accounts = await web3.eth.getAccounts();
       await factory.methods
-        .createCampaign(this.state.minimumContribution)
+        .createContract(this.state.minimumContribution)
         .send({
           from: accounts[0]
         });
@@ -66,4 +66,4 @@ class CampaignNew extends Component {
   }
 }
 
-export default CampaignNew;
+export default ContractNew;

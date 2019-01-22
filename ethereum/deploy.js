@@ -1,6 +1,6 @@
 const HDWalletProvider = require("truffle-hdwallet-provider"); // what account and network we are going to use
 const Web3 = require("web3");
-const compiledFactory = require('./build/CampaignFactory.json');
+const compiledFactory = require('./build/ContractFactory.json');
 
 const provider = new HDWalletProvider(
   "damp frost betray fork tray original drastic loan visit earth celery cart", // to generate account

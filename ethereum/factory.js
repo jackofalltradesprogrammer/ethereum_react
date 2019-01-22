@@ -1,9 +1,9 @@
 import web3 from './web3'; // we are getting the instance we created in web3.js file
-import CampaignFactory from './build/CampaignFactory.json';
+import ContractFactory from './build/ContractFactory.json';
 
 const instance = new web3.eth.Contract(
-    JSON.parse(CampaignFactory.interface),
-    '0xe77D720008827A0870769f621fda8b37f603F3A4'
+    JSON.parse(ContractFactory.interface),
+    '0xafA0a843d2aB22c5b16DBD749E9FdaE1527ABc09'
 );
 
 export default instance;

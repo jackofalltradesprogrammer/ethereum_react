@@ -1,7 +1,7 @@
 // To create a new request
 import React, { Component } from 'react';
 import { Form, Button, Message, Input } from 'semantic-ui-react';
-import Campaign from '../../../ethereum/campaign'; // to get the ABI for the Contract
+import Contract from '../../../ethereum/contract'; // to get the ABI for the Contract
 import web3 from '../../../ethereum/web3';
 import { Link, Router } from '../../../routes';
 import { EventEmitter } from 'events';
@@ -27,7 +27,7 @@ class RequestNew extends Component {
     onSubmit = async event => {
         event.preventDefault();
 
-        const campaign = Campaign(this.props.address);
+        const contract = Contract(this.props.address);
         const { description, value, recipient } = this.state;
 
         // toggle on the loading and clears if there is any error message
@@ -35,11 +35,11 @@ class RequestNew extends Component {
 
         try {
             const accounts = await web3.eth.getAccounts();
-            await campaign.methods
+            await contract.methods
                 .createRequest( description, web3.utils.toWei(value, 'ether'), recipient)
                 .send({ from: accounts[0] });
 
-            Router.pushRoute(`/campaigns/${this.props.address}/requests`);
+            Router.pushRoute(`/contracts/${this.props.address}/requests`);
         } catch (err) {
             this.setState({ errorMessage: err.message });
         }
@@ -51,7 +51,7 @@ class RequestNew extends Component {
     render() {
         return (
             <Layout>
-                <Link route={`/campaigns/${this.props.address}/requests`}>
+                <Link route={`/contracts/${this.props.address}/requests`}>
                     <a>Back</a>
                 </Link>
                 <h3>Create a Request </h3>

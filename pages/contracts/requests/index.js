@@ -3,21 +3,21 @@ import React, { Component } from 'react';
 import { Button, Table } from 'semantic-ui-react';
 import { Link } from '../../../routes';
 import Layout from '../../../components/Layout';
-import Campaign from '../../../ethereum/campaign';
+import Contract from '../../../ethereum/contract';
 import RequestRow from '../../../components/RequestRow'; // This child component will render each request 
 
 class RequestIndex extends Component {
     // this function provided by NEXT can be used to pull info from the address bar
     static async getInitialProps(props) {
         const { address} = props.query; // address variable is like a wildcard defined in the route.js
-        const campaign = Campaign(address); // pass teh address to the arrow function to Campaign and get the instance
-        const requestCount = await campaign.methods.getRequestsCount().call();
-        const approversCount = await campaign.methods.approversCount().call();
+        const contract = Contract(address); // pass teh address to the arrow function to Contract and get the instance
+        const requestCount = await contract.methods.getRequestsCount().call();
+        const approversCount = await contract.methods.approversCount().call();
 
         // Array(count).fill.map() runs number of times starting from 0 and more and gets the elements
         const requests = await Promise.all(
           Array(parseInt(requestCount)).fill().map((element, index) => {
-              return campaign.methods.requests(index).call()
+              return contract.methods.requests(index).call()
           })  
         );
 
@@ -44,7 +44,7 @@ class RequestIndex extends Component {
         return (
             <Layout>
                 <h3>Requests</h3>
-                <Link route={`/campaigns/${this.props.address}/requests/new`}>
+                <Link route={`/contracts/${this.props.address}/requests/new`}>
                     <a>
                         <Button primary floated="right" style={{ marginBottom: 10}}>Add Request</Button>
                     </a>

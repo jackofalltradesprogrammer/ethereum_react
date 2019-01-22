@@ -16,7 +16,7 @@ export default () => { // we need to export this component to be used by Layout.
                 <Link route="/">
                     <a className="item">Contracts</a>
                 </Link>
-                <Link route="/campaigns/new">
+                <Link route="/contracts/new">
                     <a className="item">+</a>
                 </Link>
             </Menu.Menu>

@@ -1,20 +1,20 @@
 pragma solidity ^0.4.17;
 
-contract CampaignFactory{
-    address[] public deployedCampaigns;
+contract ContractFactory{
+    address[] public deployedContracts;
     
-    function createCampaign(uint minimum) public { // minimum contribution for the constructor is required
-        address newCampaign = new Campaign(minimum, msg.sender); // when a new campaign is deployed the address is generated
+    function createContract(uint minimum) public { // minimum contribution for the constructor is required
+        address newContract = new Contract(minimum, msg.sender); // when a new contract is deployed the address is generated
                                                                     // the user's address is needed as manager
-        deployedCampaigns.push(newCampaign);
+        deployedContracts.push(newContract);
     }
     
-    function getDeployedCampaigns() public view returns (address[]) {
-        return deployedCampaigns;
+    function getDeployedContracts() public view returns (address[]) {
+        return deployedContracts;
     }
 }
 
-contract Campaign {
+contract Contract {
     struct Request { // definition of a type of variable, it's not an instance 
         string description;
         uint value;
@@ -27,7 +27,7 @@ contract Campaign {
     Request[] public requests; // the struct type defined above
     address public manager; // the address of the manager so people can have access to it 
     uint public minimumContribution;
-    mapping(address => bool) public approvers; // Use mapping instead of Arrays to store contributor of this Campaign
+    mapping(address => bool) public approvers; // Use mapping instead of Arrays to store contributor of this Contract
     uint public approversCount;
     
     // Modifier for the manager
@@ -36,7 +36,7 @@ contract Campaign {
         _; // the function that has this modifier is placed here automatically
     }
     
-    function Campaign(uint minimum, address creator) public {
+    function Contract(uint minimum, address creator) public {
         manager = creator; // global variable, it is always possible
         minimumContribution = minimum;
         
@@ -82,7 +82,7 @@ contract Campaign {
         request.complete = true;
     }
     
-    // function to return all the details of a campaign
+    // function to return all the details of a contract
     function getSummary() public view returns (
         uint, uint, uint, uint, address
         ) {

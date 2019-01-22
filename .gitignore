@@ -37,6 +37,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-ethereum/build/CampaignFactory.json
-ethereum/build/Campaign.json
+ethereum/build/ContractFactory.json
+ethereum/build/Contract.json
 .next/*
