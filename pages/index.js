@@ -13,6 +13,7 @@ class ContractIndex extends Component {
     return { contracts }; // this is provided as props to our component and is read as {contracts : contracts}
   }
 
+  // this fetches all the deployed contracts
   renderContracts() {
     const items = this.props.contracts.map(address => {
       // we pass a function to map, that function is called once for every elementin the array
